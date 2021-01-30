@@ -3,6 +3,10 @@ const Cube = require('../models/cube');
 const fs = require('fs');
 let productsData = require('../config/products.json');
 
+function getAll() {
+    return productsData;
+}
+
 function create(data) {
     let cube = new Cube(
         uniqid(),
@@ -20,10 +24,11 @@ function create(data) {
             console.log(err);
             return;
         }
-    })
+    } )
 };
 
 
 module.exports = {
     create,
+    getAll,
 }
