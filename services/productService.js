@@ -16,7 +16,6 @@ function getAll(query) {
     if (query.to) {
         result = result.filter(x => Number(x.level) <= query.to);
     }
-        
     return result;
 }
 
