@@ -3,6 +3,7 @@ const config = require('./config/config.js');
 const app = express();
 const routes = require('./routes'); 
 require('./config/express')(app);
+require('./config/mongoose')(app);
 
 app.use(routes);
 
