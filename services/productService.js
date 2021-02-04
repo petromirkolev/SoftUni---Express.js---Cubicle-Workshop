@@ -1,8 +1,5 @@
 const uniqid = require('uniqid');
 const Cube = require('../models/cube');
-const fs = require('fs');
-let productData = require('../data/productData');
-const { search } = require('../controllers/homeController');
 
 function getAll(query) {
     // let result = productData.getAll();
