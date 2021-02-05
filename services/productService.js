@@ -1,9 +1,8 @@
+const Accessory = require('../models/Accessory');
 const Cube = require('../models/cube');
-const productData = require('../data/productData');
- 
-function getAll(query) {
-    let result = productData.getAll();
-    // let result = Cube.getAll();
+
+async function getAll(query) {
+    let products = await Cube.find({}).lean( );
 
     if (query.search) {
         result = result.filter(x => x.name.toLowerCase().includes(query.search )); 
@@ -14,23 +13,30 @@ function getAll(query) {
     if (query.to) {
         result = result.filter(x => Number(x.level) <= query.to);
     }
-    return result;
+    return products;
 }
 
-function getOne(id) {
-    return productData.getOne(id);
-    // return Cube.getOne(id);
+async function getOne(id) {
+    let cube = await Cube.findById(id).lean();
+    return cube;
 }
 
 function create(data) {
     let cube = new Cube(data);
-    return cube.save();
-    // return productData.create(cube);
-
+    return cube.save(); 
 };
+
+async function attachAccessory(productId, accessoryId) {
+    let product = await Cube.findById(productId);
+    let accessory = await Accessory.findById(accessoryId);
+
+    product.accessories.push(accessory);
+    return product.save();
+}
 
 module.exports = {
     create,
     getAll,
     getOne,
+    attachAccessory,
 }

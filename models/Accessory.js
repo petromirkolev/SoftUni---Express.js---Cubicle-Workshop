@@ -3,20 +3,9 @@ const mongoose = require('mongoose');
 const accessorySchema = new mongoose.Schema({
 
     id: mongoose.Types.ObjectId,
-    name: {
-        type: String,
-        required: true,
-    },
-    description: {
-        type: String,
-        required: true,
-        maxlength: 50,
-    },
-    imageUrl: {
-        type: String,
-        required: true,
-        validate: /^https?/,
-    }
+    name: String,
+    description: String,
+    imageUrl: String,
 }); 
 
-module.exports = mongoose.model('Accessory', accessorySchema);
+module.exports = mongoose.model('Accessory', accessorySchema); 
