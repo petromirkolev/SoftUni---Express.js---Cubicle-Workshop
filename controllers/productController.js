@@ -11,20 +11,18 @@ router.get('/', (req, res) => {
         .catch(() => res.status(500).end());
 });
 
-
 router.get('/create', (req, res) => {
     res.render('create', { title: 'Create' });
 });
 
 router.post('/create', (req, res) => {
-
     let data = req.body;
     productService.create(data);
     res.redirect('/products');
 });
 
 router.get('/details/:id', async (req, res) => {
-    let product = await productService.getOne(req.params.id);
+    let product = await productService.getOneWithAccessories(req.params.id);
     res.render('details', { title: 'Details', product });
 });
 

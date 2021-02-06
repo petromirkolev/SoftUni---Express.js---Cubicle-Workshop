@@ -12,7 +12,6 @@ module.exports = (function (app) {
     app.use(express.static('public'));
 
     app.use(express.urlencoded({
-        extended: true, 
-    })); 
-     
+        extended: true,
+    }));
 });
