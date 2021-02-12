@@ -14,12 +14,12 @@ async function getAll(query) {
         result = result.filter(x => Number(x.level) <= query.to);
     }
     return products;
-}
+};
 
 async function getOne(id) {
     let cube = await Cube.findById(id).lean();
     return cube;
-}
+};
 
 function create(data) {
     let cube = new Cube(data);
@@ -31,14 +31,18 @@ async function attachAccessory(productId, accessoryId) {
     let accessory = await Accessory.findById(accessoryId);
     product.accessories.push(accessory);
     return product.save();
-}
+};
 
 function getOneWithAccessories(id) {
     return Cube
         .findById(id)
         .populate('accessories')
         .lean();
-}
+};
+
+function deleteOne(id) {
+    return Cube.deleteOne({_id: id});
+};
 
 module.exports = {
     create,
@@ -46,4 +50,5 @@ module.exports = {
     getOne,
     attachAccessory,
     getOneWithAccessories, 
+    deleteOne
 }

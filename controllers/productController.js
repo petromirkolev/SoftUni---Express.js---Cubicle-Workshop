@@ -7,7 +7,7 @@ const router = Router();
 router.get('/', (req, res) => {
     productService.getAll(req.query)
         .then(products => {
-            res.render('home', { title: 'Home', products })
+            res.render('home', { title: 'Home', products });
         })
         .catch(() => res.status(500).end());
 });
@@ -37,6 +37,27 @@ router.post('/:id/attach', isAuth, (req, res) => {
     productService.attachAccessory(req.params.id, req.body.accessory)
         .then(() => res.redirect(`/products/details/${req.params.id}`))
         .catch(() => res.status(500).end());
+});
+
+router.get('/:id/edit', isAuth, (req, res) => {
+    res.render('edit');
+});
+router.post('/:id/edit', isAuth, (req, res) => {
+
+});
+
+router.get('/:id/delete', isAuth, (req, res) => {
+    productService.getOne(req.params.id)
+        .then((cube) => {
+            res.render('delete', { cube });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+router.post('/:id/delete', isAuth, (req, res) => {
+    productService.deleteOne(req.params.id)
+        .then(response => res.redirect('/products'));
 });
 
 module.exports = router; 

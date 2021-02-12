@@ -29,5 +29,4 @@ const login = async ({ username, password }) => {
 module.exports = {
     register,
     login,
-
 }

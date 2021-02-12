@@ -8,7 +8,7 @@ router.get('/create', (req, res) => {
 
 router.post('/create', (req, res) => {
     accessoryService.create(req.body)
-        .then(() => res.redirect('/products')) 
+        .then(() => res.redirect('/products'))
         .catch(() => res.status(500).end());
 });
 
